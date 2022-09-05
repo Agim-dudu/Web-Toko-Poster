@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>toposs/published</title>
+    <link rel="shortcut icon" href="Icon Toposs.ico">
+    <link rel="stylesheet" href="Beranda.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="myeditModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="close">&times;</span>
+            <h2>Tambahkan Poster</h2>
+          </div>
+          <div class="modal-body">
+            <br>
+            <label for="namaEdit">Nama</label>
+            <input type="text" id="namaEdit" name="namaEdit"><br><br>
+            <label for="hargaEdit">Harga</label>
+            <input type="number" id="hargaEdit" name="hargaEdit"><br><br>
+            <label for="categoryEdit">Category</label>
+            <select id="categoryEdit" name="categorylistEdit" form="categoryEdit">
+                <option value="anime">Anime & Manga</option>
+                <option value="cartoons">Cartoons</option>
+                <option value="celeb">Celebrities</option>
+                <option value="movies">Movies</option>
+                <option value="sport">Sport</option>
+            </select><br><br>
+            
+            <button id="uploadEdit">Update Image</button>
+          </div>
+        </div>
+    </div>
+    <div class="container">
+        <!-- header -->
+        <div class="flex-column">
+            <nav>
+                <div class="flex-row">
+                    <div class="header">
+                        <img class="logo" src="Logo Toposs.png" alt="Logo">
+                    </div>
+                    <div class="search">
+                        <form class="searchbox">
+                            <input class="searchtext" type="text" placeholder="Search Disini...">
+                            <a href="Find.html"><span class="material-symbols-outlined searchicon">search</span></a>
+                        </form>
+                    </div>
+                    <div class="icon">
+                        <a href="Saved.html">
+                            <span class="material-symbols-outlined">favorite</span><br>
+                            <span>Saved</span>
+                        </a>
+                    </div>
+                    <div class="icon">
+                        <a href="Cart.html">
+                            <span class="material-symbols-outlined">shopping_cart</span><br>
+                            <span>Cart</span>
+                        </a>
+                    </div>
+                    <div class="icon" id="tablogin">
+                        <a href="Login.html">
+                            <span class="material-symbols-outlined">person</span><br>
+                            <span>Sign In</span>
+                        </a>
+                    </div>
+                    <div class="icon" id="profile" style="display: none;">
+                        <div class="dropdown">
+                            <button class="dropbtn">
+                                <span class="material-symbols-outlined">account_box</span>
+                                <span class="material-symbols-outlined">arrow_drop_down</span>
+                            </button>
+                            <div class="dropdown-content">
+                                <a href="Myprofile.html">My Profile</a>
+                                <hr>
+                                <a href="Upload.html">Upload your artwork</a>
+                                <a href="Earnings.html">My Earnings</a>
+                                <a href="Published.html">Upload History</a>
+                                <a href="Order.html">My Orders</a>
+                                <a href="Settings.html">Account Settings</a>
+                                <hr>
+                                <a id="logout">Log Out</a>
+                            </div>
+                          </div> 
+                    </div>
+                </div>
+            </nav>
+
+            <!-- content -->
+            <div class="flex-row">
+                <div class="pbls-content" id="pstr">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Poster</th>
+                                <th>Nama Poster</th>
+                                <th>Kategori</th>
+                                <th>Harga</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="parent">
+        
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- footer -->
+            <div class="flex-row">
+                <div class="footer">
+                    <h3>Support</h3>
+                    <p>Terms of use</p>
+                    <p>Contact us</p>
+                    <p>Copyrights</p>
+                    <p>Privacy policy</p>
+                </div>
+                <div class="footer">
+                    <h3>Partner</h3>
+                    <img class="partner" src="img/Tokotok nama.png" alt="Logo Tokotok">
+                </div>
+                <div class="footer">
+                    <h3>Secure payment</h3>
+                    <img class="secure" src="img/payment.png" alt="Secure payment">
+                </div>
+                <div class="footer">
+                    <h3>Find us</h3>
+                    <img class="find" src="img/fb.png" alt="Facebook">
+                    <img class="find" src="img/ig.png" alt="Instagram">
+                    <img class="find" src="img/twit.png" alt="Twitter">
+                    <img class="find" src="img/p.png" alt="Pinterest">
+                </div>
+            </div>    
+        </div> 
+    </div>
+    <script src="Published.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
+        import { getDatabase, ref, set, push, get, child, onValue, update, remove } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-auth.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBtwsIft9BS24yfM0qAJ7VUBfE4rIXEdrM",
+            authDomain: "tokoposter-59447.firebaseapp.com",
+            projectId: "tokoposter-59447",
+            storageBucket: "tokoposter-59447.appspot.com",
+            messagingSenderId: "660302277836",
+            appId: "1:660302277836:web:a607e85e507db70a682669"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const auth = getAuth();
+
+        var selectedkey;
+        var myeditModal = document.getElementById("myeditModal");
+        
+        // getData RealTime
+
+        function ambilDataFirebase(){
+            const dbRef = ref(database,"dataBarang");
+            var tabel = document.getElementById("tabel");
+            
+            onValue(dbRef,(snapshot) => {
+                let barang = [];
+                snapshot.forEach(childSnapshot => {
+                    let temp = childSnapshot.val();
+                    temp["key"] = childSnapshot.key;
+                    barang.push(temp);
+                });
+                tambahkanItemKeHome(barang);
+            });
+        }
+
+        var no=0;
+        function tambahkanItemKeList(key, nama, image, kategori, harga){
+            let parent = document.getElementById("parent");
+            let trow = document.createElement("tr");
+            let table = `
+                                <td>${++no}</td>
+                                <td><img class="pbls-img" src="${image}" alt="${nama}"></td>
+                                <td>${nama}</td>
+                                <td>${kategori}</td>
+                                <td>${harga}</td>
+                            `;
+            let td = document.createElement("td");
+            let img = document.createElement("img");
+
+            let btnEdit = document.createElement("button");
+            let t = document.createTextNode("Edit");
+            btnEdit.id = "myeditbtn";
+            btnEdit.classList.add("btn");
+            btnEdit.value = key;
+            btnEdit.appendChild(t);
+            btnEdit.addEventListener("click", () => {
+                myeditModal.style.display = "block";
+                selectedkey = btnEdit.value;
+            });
+            
+            function showDataEdit(key) {
+                onValue(ref(database, 'dataBarang/'+key), (snapshot) => {
+                    const data = snapshot.val();
+                    namaEdit.value = data.nama;
+                    hargaEdit.value = data.harga;
+                });
+            }
+
+            btnEdit.onclick = function(){showDataEdit(btnEdit.value)};
+
+            let btnHapus = document.createElement("button");
+            t = document.createTextNode("Hapus");
+            btnHapus.id = "btnHapus";
+            btnHapus.classList.add("btn");
+            btnHapus.value = key;
+            btnHapus.appendChild(t);
+            btnHapus.addEventListener("click", (key) => {
+            hapusData(btnEdit.value);
+            });
+
+            trow.innerHTML = table
+            td.appendChild(btnEdit);
+            td.appendChild(btnHapus);
+            trow.appendChild(td);
+            parent.appendChild(trow);
+        }
+
+        function tambahkanItemKeHome(barang){
+            barang.forEach((element) => {
+                tambahkanItemKeList(element.key, element.nama, element.image, element.kategori, element.harga);
+            });
+        };
+
+        window.onload = ambilDataFirebase();
+
+        //Mengedit data
+        var uploadEdit = document.getElementById("uploadEdit");
+        uploadEdit.onclick = function () {
+            updateData(selectedkey);
+        };
+
+        function updateData(id) {
+            let namaEdit = document.getElementById("namaEdit"),
+                hargaEdit = document.getElementById("hargaEdit"),
+                categoryEdit = document.getElementById("categoryEdit");
+            let data = {
+                nama: namaEdit.value,
+                kategori: categoryEdit.value,
+                harga: hargaEdit.value
+            }
+
+            update(ref(database, "dataBarang/" + id), data)
+            .then(() => {
+                alert("Data berhasil diupdate");
+                window.location.reload();
+            })
+        }
+
+        //HAPUS DATA
+        function hapusData(id) {
+
+            let confirmAction = confirm("Are you sure to delete this product?");
+            if (confirmAction) {
+                remove(ref(database, "dataBarang/"+id));
+                alert("Product successfully deleted");
+                document.location.reload();
+            } else {
+            alert("Deleting canceled");
+            }
+        }
+
+        // logout
+        logout.addEventListener('click',(e)=>{
+
+        signOut(auth).then(() => {
+        // Sign-out successful.
+        document.getElementById("profile").style.display="none";
+        document.getElementById("tablogin").style.display="inline";
+        alert('loged out');
+        }).catch((error) => {
+        // An error happened.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+            alert(errorMessage);
+        });
+
+        });
+        
+        const user = auth.currentUser;
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById("profile").style.display="inline";
+                document.getElementById("tablogin").style.display="none";
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/firebase.User
+
+                const uid = user.uid;
+                //bla bla bla
+                // ...
+            } else {
+                // User is signed out
+                // ...
+                //bla bla bla
+            }
+        });
+      </script>
+</body>
+</html>

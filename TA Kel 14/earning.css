@@ -1,0 +1,51 @@
+.box1{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 20px ;
+}
+.isi1{
+    display: grid;
+    grid-template-columns: auto auto;
+    background-color: aqua;
+}
+.isi2{
+    background-color:chartreuse;
+    text-align: center;
+    padding: 5%;
+}
+.isi3{
+    background-color: blueviolet;
+    margin: 10%;
+    padding: 10%;
+    text-align: center;
+}
+.isi1 table{
+    padding: 7%;
+}
+.isi5{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+.isi9{
+    display: grid;
+    grid-template-columns: auto auto;
+
+}
+td{
+    padding: 10px;
+}
+.data{
+    display: grid;
+    align-content: center;
+    text-align: center;
+}
+.data table thead td{
+    background-color: aqua;
+}
+.data table tbody td{
+    background-color: red;
+    height: 300px;
+}
+.data table{
+    border: 2px solid black;
+}
